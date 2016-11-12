@@ -1,4 +1,6 @@
 from PIL import Image
+import io
+import hashlib
 import sys
 import imagehash
 
@@ -41,9 +43,12 @@ def decrypt(img, orig):
             dmessage+=chr(num)
 
 def hash(img):
-    return imagehash.average_hash(Image.open(img))
+    img_bytes = open(img, 'rb').read()
+    hash_bytes = hashlib.sha512(img_bytes).digest()
+    Image.frombytes('1', (8, 8), hash_bytes).show()
+    return
 
 if __name__ == "__main__":
-    encrypt(sys.argv[1], sys.argv[2]);
-    print(decrypt(sys.argv[2],sys.argv[1]))
-    print(hash(sys.argv[2]))
+    #encrypt(sys.argv[1], sys.argv[2]);
+    #print(decrypt(sys.argv[2],sys.argv[1]))
+    print(hash(sys.argv[1]))
