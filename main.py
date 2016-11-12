@@ -49,6 +49,6 @@ def hash(img):
     return
 
 if __name__ == "__main__":
-    #encrypt(sys.argv[1], sys.argv[2]);
-    #print(decrypt(sys.argv[2],sys.argv[1]))
+    encrypt(sys.argv[1], sys.argv[2]);
+    print(decrypt(sys.argv[2],sys.argv[1]))
     print(hash(sys.argv[1]))
