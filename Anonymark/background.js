@@ -21,30 +21,18 @@ chrome.contextMenus.create({
 });
 
 
-var uploadUrl = 'https://www.example.com/uploads';
+var uploadUrl = window.location.href
 /* Creates an `input[type="file]` */
 var fileChooser = document.createElement('input');
 fileChooser.type = 'file';
 fileChooser.addEventListener('change', function () {
     var file = fileChooser.files[0];
-    var formData = new FormData();
-    formData.append(file.name, file);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', uploadUrl, true);
-    xhr.addEventListener('readystatechange', function (evt) {
-        console.log('ReadyState: ' + xhr.readyState,
-            'Status: ' + xhr.status);
-    });
-
-    xhr.send(formData);
-    form.reset();   // <-- Resets the input so we do get a `change` event,
-    //     even if the user chooses the same file
-//~~~~~~~~~~~~~ me ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    var url = window.location.href;
-    url = url.substring(url.indexOf('#') + 1);
-    renderImage(url);
-//~~~~~~~~~~~ end me ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        console.log(reader.result);
+        renderImage(reader.result);
+    }
+    reader.readAsDataURL(file);
 });
 
 /* Wrap it in a form for resetting */
