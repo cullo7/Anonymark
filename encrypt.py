@@ -21,6 +21,7 @@ def encrypt(orig, savefile, idfk):
     for i in range(img.size[0]):
         for j in range(img.size[1]):
             lst = [0,0,0,0]
+            print(pixelMap[i,j])
             if type(pixelMap[i,j]) ==  int:
                 #print(str(im.palette.palette[pixelMap[i,j]*3])+" "+str(im.palette.palette[pixelMap[i,j]*3+1])+" "+str(im.palette.palette[pixelMap[i,j]*3+2]))
                 lst[0] = im.palette.palette[pixelMap[i,j]*3]+ int(math.floor(ord(message[c%l])/100)) if im.palette.palette[pixelMap[i,j]*3] < 245 else im.palette.palette[pixelMap[i,j]*3]- int(math.floor(ord(message[c%l])/100))
@@ -32,10 +33,11 @@ def encrypt(orig, savefile, idfk):
                 lst[2] = pixelMap[i,j][2]+ int(ord(message[c%l]) % 10) if pixelMap[i,j][2] < 245 else pixelMap[i,j][2] - int(ord(message[c%l]) % 10) 
                 lst[3] = pixelMap[i,j][3]
             pixelsNew[i,j] =tuple(lst)  
+            print(pixelsNew[i, j])
+            print("\n")
             c+=1
     im.close()
     img.show()
-    os.chdir("/Users/CulloFiles/Desktop")
     img.save("encrypt.png")
     img.close()
 
