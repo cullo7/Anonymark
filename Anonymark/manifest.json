@@ -9,7 +9,7 @@
         "default_icon": "icon.png"
     },
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["support_scripts/jquery-3.1.1.js", "background.js"]
     },
     "icons": {
         "16": "icon.png"
