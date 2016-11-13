@@ -4,9 +4,16 @@ import sys
 import math
 import hashlib
 import urllib.request,io
+import base64
 
 message = "Aiden Cullo Brevi manu."
 l = len(message)
+
+def imgFromString(base64Str):
+    base64Str = base64Str[base64Str.index(','):] # THIS IS WHY WE HAVE A PROBLEM LATER IF WE DO
+    data = base64.b64decode(base64Str)
+    image = Image.open(io.BytesIO(data))
+    return image
 
 def encrypt(imgURL, savefile):
     im = Image.open(io.BytesIO(urllib.request.urlopen(imgURL).read()))
