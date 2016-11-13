@@ -9,29 +9,22 @@ function loadScript(url, callback) {
     script.onload = callback;
     head.appendChild(script);
 }
-function decrypt() {                                                                                    // call encryption JS here
-    var encrypted_url = window.location.href;
-    encrypted_url = url.substring(url.indexOf('#') + 1);
-    var img = document.getElementById("hash");
-    // img.src = get_hash();
-    var div = document.getElementById("decoded");
-    div.innerHTML = decryptor(url, fileChooser.files[0]);                                           // pass to other JS file
-}
 var script_load = function() {
-    decrypt("Hello!");
+    var url = window.location.href;
+    url = url.substring(url.indexOf('#') + 1);
+    decryptor(url, image_str);
 };
 var fileChooser = document.createElement('input');
-// var file;
+var image_str;
 fileChooser.type = 'file';
 fileChooser.addEventListener('change', function () {
-    // var file = fileChooser.files[0];
-    loadScript('resources/encrypt.js', script_load);                                                  // load auxilary JS file
-    // var reader = new FileReader();
-    // reader.onloadend = function () {
-    //     image_str = reader.result;
-    //     loadScript('resources/encrypt.js', script_load);
-    // }
-    // reader.readAsDataURL(file);
+    var file = fileChooser.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        image_str = reader.result;
+        loadScript('main.js', script_load);
+    }
+    reader.readAsDataURL(file);
 });
 /* Wrap it in a form for resetting */
 // var form = document.createElement('form');       Maybe these two lines are not needed
