@@ -17,6 +17,7 @@ function decryptor(url, file_str) {
         var num = 0;
         for (var i = 0; i < data.length; i += 4) {
             num = 0;
+            console.log(key_data[i]+" "+key_data[i+1]+" "+key_data[i+2])
             num += Math.abs(data[i] - key_data[i])*100;
             num += Math.abs(data[i + 1] - key_data[i + 1])*10;
             num += Math.abs(data[i + 2] - key_data[i + 2]);

@@ -6,13 +6,12 @@ message = "Aiden Cullo Brevi manu."
 l = len(message)
 im = Image.open(sys.argv[1])
 pixelMap = im.load()
+print(im.size[0])
+print(im.size[1])
 img = Image.new(im.mode, im.size)
 pixelsNew = img.load()
 c = 0
-for i in range(1):
-    for j in range(137):
-        print(pixelMap[i,j])
-        print(im.palette.palette[pixelMap[i,j]*3])
-        print(im.palette.palette[pixelMap[i,j]*3+1])
-        print(im.palette.palette[pixelMap[i,j]*3+2])
+for j in range(im.size[1]):
+    for i in range(im.size[0]):
+        print(i , ' ' , j ,' ' , pixelMap[i,j])
         print('\n')
