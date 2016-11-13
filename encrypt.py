@@ -18,23 +18,23 @@ def encrypt(orig, savefile, idfk):
     img.format = im.format
     pixelsNew = img.load()
     c = 0
-    for i in range(img.size[1]):
-        for j in range(img.size[0]):
+    for j in range(img.size[1]):
+        for i in range(img.size[0]):
             lst = [0,0,0,0]
-            print(pixelMap[j,i])
-            if type(pixelMap[j,i]) ==  int:
+            print(pixelMap[i,j])
+            if type(pixelMap[i,j]) ==  int:
                 #print(str(im.palette.palette[pixelMap[j,i]*3])+" "+str(im.palette.palette[pixelMap[j,i]*3+1])+" "+str(im.palette.palette[pixelMap[j,i]*3+2]))
-                lst[0] = im.palette.palette[pixelMap[j,i]*3]+ int(math.floor(ord(message[c%l])/100)) if im.palette.palette[pixelMap[j,i]*3] < 245 else im.palette.palette[pixelMap[j,i]*3]- int(math.floor(ord(message[c%l])/100))
-                lst[1] = im.palette.palette[pixelMap[j,i]*3+1]+ int(math.floor((ord(message[c%l]) % 100)/10)) if im.palette.palette[pixelMap[j,i]*3+1] < 245 else im.palette.palette[pixelMap[j,i]*3+1]- int(math.floor((ord(message[c%l]) % 100)/10))
-                lst[2] = im.palette.palette[pixelMap[j,i]*3+2]+ int(ord(message[c%l]) % 10) if im.palette.palette[pixelMap[j,i]*3+2] < 245 else im.palette.palette[pixelMap[j,i]*3+2]- int(ord(message[c%l]) % 10)
+                lst[0] = im.palette.palette[pixelMap[i,j]*3]+ int(math.floor(ord(message[c%l])/100)) if im.palette.palette[pixelMap[i,j]*3] < 245 else im.palette.palette[pixelMap[i,j]*3]- int(math.floor(ord(message[c%l])/100))
+                lst[1] = im.palette.palette[pixelMap[i,j]*3+1]+ int(math.floor((ord(message[c%l]) % 100)/10)) if im.palette.palette[pixelMap[i,j]*3+1] < 245 else im.palette.palette[pixelMap[i,j]*3+1]- int(math.floor((ord(message[c%l]) % 100)/10))
+                lst[2] = im.palette.palette[pixelMap[i,j]*3+2]+ int(ord(message[c%l]) % 10) if im.palette.palette[pixelMap[i,j]*3+2] < 245 else im.palette.palette[pixelMap[i,j]*3+2]- int(ord(message[c%l]) % 10)
             else:
-                lst[0] = pixelMap[j,i][0]+ int(math.floor(ord(message[c%l])/100)) if pixelMap[j,i][0] < 245 else pixelMap[j,i][0] - int(math.floor(ord(message[c%l])/100))
-                lst[1] = pixelMap[j,i][1]+ int(math.floor((ord(message[c%l]) % 100)/10)) if pixelMap[j,i][1] < 245 else pixelMap[j,i][1] - int(math.floor((ord(message[c%l]) % 100)/10)) 
-                lst[2] = pixelMap[j,i][2]+ int(ord(message[c%l]) % 10) if pixelMap[j,i][2] < 245 else pixelMap[j,i][2] - int(ord(message[c%l]) % 10) 
-                lst[3] = pixelMap[j,i][3]
-            pixelsNew[j,i] =tuple(lst)  
-            # print(pixelsNew[i, j])
-            print("\n")
+                lst[0] = pixelMap[i,j][0]+ int(math.floor(ord(message[c%l])/100)) if pixelMap[i,j][0] < 245 else pixelMap[i,j][0] - int(math.floor(ord(message[c%l])/100))
+                lst[1] = pixelMap[i,j][1]+ int(math.floor((ord(message[c%l]) % 100)/10)) if pixelMap[i,j][1] < 245 else pixelMap[i,j][1] - int(math.floor((ord(message[c%l]) % 100)/10)) 
+                lst[2] = pixelMap[i,j][2]+ int(ord(message[c%l]) % 10) if pixelMap[i,j][2] < 245 else pixelMap[i,j][2] - int(ord(message[c%l]) % 10) 
+                lst[3] = pixelMap[i,j][3]
+            pixelsNew[i,j] =tuple(lst)  
+            print(pixelsNew[i,j])
+            print(j*im.size[0]+i)
             c+=1
     im.close()
     img.show()
