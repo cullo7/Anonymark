@@ -9,8 +9,10 @@
         "default_icon": "resources/icon.png"
     },
     "background": {
-        "scripts": ["resources/jquery-3.1.1.min.js", "background.js"],
-        "pages": ["display.html"]
+        "scripts": ["background.js"],
+        "pages": ["display.html"],
+        "persistent": true
+
     },
     "icons": {
         "16": "resources/icon.png",
@@ -19,7 +21,6 @@
     },
     "permissions": [
         "contextMenus",
-        "tabs",
-        "http://api.wordnik.com/"
+        "tabs"
     ]
 }

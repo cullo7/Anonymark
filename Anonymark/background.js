@@ -57,16 +57,26 @@ function renderImage(url) {
     img = document.getElementById('hash');
     img.src = url;
 }
-function getClickHandler() {
-    return function(info) {
+// function getClickHandler() {
+//     return function(info, tab) {
+//         var url = 'display.html#' + info.srcUrl;
+//         chrome.tabs.create({url: url});
+//     };
+// };
+// chrome.contextMenus.create({
+//     "title" : "Decrypt Image",
+//     "type" : "normal",
+//     "contexts" : ["image"],
+//     "onclick" : getClickHandler()
+// });
+var clickHandler = function(info, tab) {
         var url = 'display.html#' + info.srcUrl;
         chrome.tabs.create({url: url});
-        renderImage(info);
-    };
-};
+}
 chrome.contextMenus.create({
-    "title" : "Decrypt Image",
-    "type" : "normal",
-    "contexts" : ["image"],
-    "onclick" : getClickHandler()
+    "title": "Decrypt image",
+    "contexts": ["image"]
 });
+// Must be synchronously called on event page load,
+//   for instance in the top level code
+chrome.contextMenus.onClicked.addListener(clickHandler);
